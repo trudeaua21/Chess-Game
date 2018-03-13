@@ -5,15 +5,22 @@ public abstract class ChessPiece implements IChessPiece {
   private Player owner;
   protected ChessPiece(Player player) {
     this.owner = player;
-   }
+  }
 
   public abstract String type();
   
   public Player player() {
-    // complete this
+    return this.owner;
   }
 
   public boolean isValidMove(Move move, IChessPiece[][] board) {
-	   // complete this
+	   //1. each move must involve two different squares (the from and the to must be different)
+	   //2. the "from" square must contain a chess piece
+	   //3. the "to" square is either empty or contains the opposite player's piece
+  }
+  
+  //Optional, I'll do it
+  boolean moveIsOnlyOverEmptySquares( Move move, IChessPiece[][] board){
+  
   }
 }
