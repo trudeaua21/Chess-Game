@@ -14,13 +14,14 @@ public abstract class ChessPiece implements IChessPiece {
   }
 
   public boolean isValidMove(Move move, IChessPiece[][] board) {
-	   //1. each move must involve two different squares (the from and the to must be different)
-	   //2. the "from" square must contain a chess piece
-	   //3. the "to" square is either empty or contains the opposite player's piece
+  	//move is board[row][col]
+	   Spencer//1. each move must involve two different squares (the from and the to must be different)
+	   Spencer//2. the "from" square must contain a chess piece (the board space is != null)
+	   Aaron//3. the "to" square is either empty or contains the opposite player's piece
   }
   
   //Optional, I'll do it
   boolean moveIsOnlyOverEmptySquares( Move move, IChessPiece[][] board){
-  
+  	Aaron
   }
 }
