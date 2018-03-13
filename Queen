@@ -1,0 +1,12 @@
+package ChessPrj;
+
+public class Queen extends ChessPiece{
+  public String type(){
+    return "Queen;
+  }
+  
+  public boolean isValidMove(){
+    return false;
+  }
+
+}
