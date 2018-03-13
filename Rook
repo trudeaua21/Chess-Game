@@ -6,6 +6,6 @@ public class Rook extends ChessPiece{
   }
 
   public boolean isVaildMove(){
-  
+    return true;
   }
 }
