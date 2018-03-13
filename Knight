@@ -1,0 +1,14 @@
+package chess;
+
+public class Knight extends ChessPiece{
+
+  public String type(){
+    return "Knight";
+  }
+  
+  public boolean isValidMove(){
+    return false;
+  }
+
+}
+
