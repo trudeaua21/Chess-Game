@@ -6,7 +6,7 @@ public class King extends ChessPiece{
   }
   
   public boolean isValidMove(){
-    return true;
+    return false;
   }
 
 }
