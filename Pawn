@@ -2,10 +2,11 @@ package ChessPrj;
 
 public class Pawn extends ChessPiece{
 
-public String type(){
-  return "Pawn";
-}
+  public String type(){
+    return "Pawn";
+  }
 
-public boolean isValidMove(){
-
+  public boolean isValidMove(){
+  
+  }
 }
