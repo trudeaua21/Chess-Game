@@ -1,0 +1,11 @@
+package ChessPrj;
+
+public class Rook extends ChessPiece{
+  public String type(){
+    return "Rook";
+  }
+
+  public boolean isVaildMove(){
+  
+  }
+}
