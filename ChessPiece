@@ -22,7 +22,11 @@ public abstract class ChessPiece implements IChessPiece {
 	   else if(move(fromRow, fromColumn) == null)
 	   	return false;
 	   
-	   Aaron//3. the "to" square is either empty or contains the opposite player's piece
+	   Aaron//3. the "to" square has to be empty or contains the opposite player's piece
+	   if(board[move.toRow][move.toColumn] != null && board[move.toRow][move.toColumn].player() != this.owner)
+	   	return false;
+		
+	return true;
   }
   
   //Optional, I'll do it
