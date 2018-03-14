@@ -29,8 +29,97 @@ public abstract class ChessPiece implements IChessPiece {
 	return true;
   }
   
-  //Optional, I'll do it
-  boolean moveIsOnlyOverEmptySquares( Move move, IChessPiece[][] board){
-  	Aaron
-  }
+  //IMPORTANT: THIS METHOD WILL ONLY WORK FOR ROOKS, BISHOPS AND QUEENS:
+	//KNIGHTS WILL NOT WORK AS IT WILL TREAT IT'S MOVE AS THOUGH IT MOVES
+	//DIAGONALLY STRAIGHT.
+	public boolean moveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board){
+		//If the move is only moving over the same row
+		if(move.fromRow == move.toRow && move.fromColumn != move.toColumn)
+			return horizontalMoveIsOnlyOverEmptySquares(move, board);
+		//If the move is moving over the same column
+		else if(move.fromRow != move.toRow && move.fromColumn == move.toColumn) 
+			return verticalMoveIsOnlyOverEmptySquares(move, board);
+		
+		//Move is diagonal
+		else
+			return diagonalMoveIsOnlyOverEmptySquares(move, board);
+	}
+
+	//NOTE: THIS HERE IS PROBABLY STUPID
+	private boolean diagonalMoveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board) {
+		//If the move is moving diagonally
+		//NOTE: we only need to worry about cases where we subtract/add the row
+		//and column value by the same value each time, as no move that we'd need
+		//to use this method to check would involve a non-perfect 1 / 1 slope move.
+		//Down-Right(using CS grid, reminder: down is row++)
+		if(move.fromRow < move.toRow && move.fromColumn < move.toColumn)
+			for(int i = 1; i < move.toColumn - move.fromColumn; i++)
+				if(board[move.fromRow + i][move.fromColumn + i] != null)
+					return false;
+		
+		//Up-Right
+		if(move.fromRow > move.toRow && move.fromColumn < move.toColumn)
+			for(int i = 1; i < move.toColumn - move.fromColumn; i++)
+				if(board[move.fromRow - i][move.fromColumn + i] != null)
+					return false;
+		
+		//Down-Left
+		if(move.fromRow < move.toRow && move.fromColumn > move.toColumn)
+			for(int i = 1; i < move.fromColumn - move.toColumn; i++)
+				if(board[move.fromRow + i][move.fromColumn - i] != null)
+					return false;
+		//Up-Left
+		if(move.fromRow > move.toRow && move.fromColumn > move.toColumn)
+			for(int i = 1; i < move.fromColumn - move.toColumn; i++)
+				if(board[move.fromRow - i][move.fromColumn - i] != null)
+					return false;
+		
+		return true;
+	}
+
+	private boolean verticalMoveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board) {
+		//If the move is moving over the same column
+		if(move.fromRow != move.toRow && move.fromColumn == move.toColumn) {
+			//If the piece is moving down
+			//TODO: I think this would be down since it's the CS grid
+			if(move.toRow > move.fromRow) {
+				//for each piece between the two locations
+				for(int i = move.fromRow + 1; i < move.toRow; i++)
+					if(board[i][move.fromColumn] != null)
+						//move isn't over only empty squares if one of the board locations is null
+						return false;
+			}
+			//If the piece is moving up
+			else {
+				for(int i = move.fromRow - 1; i > move.toRow; i--)
+					if(board[i][move.fromColumn] != null)
+						return false;
+			}
+		}
+		
+		return true;
+	}
+
+	private boolean horizontalMoveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board) {
+		//If the move is only moving over the same row
+		if(move.fromRow == move.toRow && move.fromColumn != move.toColumn) {
+			//If the piece is moving right
+			if(move.toColumn > move.fromColumn) {
+				//for each piece between the two locations
+				for(int i = move.fromColumn + 1; i < move.toColumn; i++)
+					if(board[move.fromRow][i] != null)
+						//move isn't over only empty squares if one of the board locations is null
+						return false;
+			}
+			//If the piece is moving left
+			else {
+				for(int i = move.fromColumn - 1; i > move.toColumn; i--)
+					if(board[move.fromRow][i] != null)
+						return false;
+			}
+		}
+		
+		return true;
+	}
+	
 }
