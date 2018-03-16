@@ -1,29 +1,34 @@
 package chess;
 
 public class Bishop extends ChessPiece{
-  
-  /* A flag variable for whether a piece has moved yet.*/
-  private boolean flag;
 
   public Bishop(Player player){
     super(player);
-    flag = false;
   }
   
   public String type(){
     return "Bishop";
   }
   
-  public boolean isValidMove(){
-    //
-  
+  public boolean isValidMove(Move move, IChessPiece[][] board){
+    //Valid pawn moves: Any diagonal direction.
+    //                : Take an enemy piece from any valid direction. 
+    // Return false if any of these cases are FALSE
   
     //Checks to see if the superclass isValidMove is false.
-    if(super.isValidMove == false)
+    if(super.isValidMove(move, board) == false)
       return false;
       
+    //Checks to see if the Bishop is moving over empty squares.
     if(super.moveIsOnlyOverEmptySquares(move, board) == false)
       return false;
+      
+    //Checks to see if the piece is moving diagonally.
+    if(move.fromColumn == move.toColumn || move.fromRow == move.toRow)
+      return false;
+      
+    else
+      return true;
   }
 
 }
