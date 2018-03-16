@@ -1,6 +1,14 @@
 package ChessPrj;
 
 public class King extends ChessPiece{
+
+  private boolean flag; 
+
+  public King(Player player){
+    super(player);
+    flag = false;
+  }
+  
   public String type(){
     return "King";
   }
