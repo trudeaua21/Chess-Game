@@ -1,14 +1,44 @@
 package chess;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 public class ChessGUI {
- public static void main(String[] args) {
-  JFrame frame = new JFRame("Chess Game");
-  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//-----------------------------------------------------------------
+		//  Creates and displays the main program frame.
+		//-----------------------------------------------------------------
+		public static void main (String[] args)
+		{
 
-  ChessPanel panel = new ChessPanel();
-  frame.getContentPane().add(panel);
+		    JMenuBar menus;
+		    JMenu fileMenu;
+		    JMenuItem quitItem;
+		    JMenuItem gameItem;   
 
-  frame.pack();
-  frame.setVisible(true);
- }
+			JFrame frame = new JFrame ("Chess");
+			frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+			
+	        fileMenu = new JMenu("File");
+	        quitItem = new JMenuItem("quit");
+	        gameItem = new JMenuItem("new game");
+	        
+	        fileMenu.add(gameItem);
+	        fileMenu.add(quitItem);
+	        menus = new JMenuBar();
+	        frame.setJMenuBar(menus);
+	        menus.add(fileMenu);
+	        
+	        ChessPanel panel = new ChessPanel();
+	       
+			frame.getContentPane().add(panel);
+	        
+
+			frame.setSize(1000, 800);
+			frame.setVisible(true);
+		}
 }
