@@ -5,7 +5,7 @@ public class Rook extends ChessPiece{
     return "Rook";
   }
 
-  public boolean isVaildMove(){
+  public boolean isVaildMove(Move move, IChessPiece board[][]){
     //Checks to see if the rook is moving over empty squares.
     if(moveIsOnlyOverEmptySquares(move(fromRow, fromColumn, toRow, toColumn), board[move.toRow][move.toColumn]) == false)
       return false;
