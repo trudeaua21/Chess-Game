@@ -1,13 +1,22 @@
 package ChessPrj;
 
 public class Rook extends ChessPiece{
+
+  /* A flag variable for whether a piece has moved yet.*/
+  private boolean flag;
+
   public String type(){
     return "Rook";
+    flag = false;
   }
 
-  public boolean isVaildMove(Move move, IChessPiece board[][]){
+  public boolean isVaildMove(Move move, IChessPiece[][] board){
+    //Checks to see if the superclass isValidMove is false.
+    if(super.isValidMove == false)
+      return false;
+    
     //Checks to see if the rook is moving over empty squares.
-    if(moveIsOnlyOverEmptySquares(move(fromRow, fromColumn, toRow, toColumn), board[move.toRow][move.toColumn]) == false)
+    if(super.moveIsOnlyOverEmptySquares(move, board) == false)
       return false;
     else
       return true;
