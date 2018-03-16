@@ -28,6 +28,7 @@ public class Queen extends ChessPiece{
     //Checks to see if the Queen isn't moving over empty squares.
     else if(super.moveIsOnlyOverEmptySquares(move, board) == false)
       return false;
+      
     else
       return true;
   }
