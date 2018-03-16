@@ -1,13 +1,9 @@
 package chess;
 
 public class Knight extends ChessPiece{
-  
-  /* A flag variable for whether a piece has moved yet.*/
-  private boolean flag; 
 
   public Knight(Player player){
     super(player);
-    flag = false;
   }
   
   public String type(){
