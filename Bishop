@@ -12,7 +12,7 @@ public class Bishop extends ChessPiece{
   
   public boolean isValidMove(Move move, IChessPiece[][] board){
     //Valid Bishop moves: Any diagonal direction.
-    //                : Take an enemy piece from any valid direction. 
+    //                  : Take an enemy piece from any valid direction. 
     // Return false if any of these cases are FALSE
   
     //Checks to see if the superclass isValidMove is false.
