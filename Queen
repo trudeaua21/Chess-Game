@@ -14,12 +14,22 @@ public class Queen extends ChessPiece{
     return "Queen;
   }
   
-  public boolean isValidMove(){
-    //Valid queen moves: 1 forward
-    //                : 2 forward on first move
-    //                : Diagonally if you are taking an enemy piece
-    //                : en passant
+  public boolean isValidMove(Move move, IChessPiece[][] board){
+    //Valid Queen moves: Forward & backward any number of unoccupied squares.
+    //                 : Horizontally & vertically any number of unoccupied squares.
+    //                 : Diagonally any direction any number of unoccupied squares.
+    //                 : Take an enemy piece from any valid direction.
     // Return false if any of these cases are FALSE
+    
+    //Checks to see if the superclass isValidMove is false.
+    if(super.isValidMove(move, board) == false)
+      return false;
+    
+    //Checks to see if the Queen isn't moving over empty squares.
+    else if(super.moveIsOnlyOverEmptySquares(move, board) == false)
+      return false;
+    else
+      return true;
   }
 
 }
