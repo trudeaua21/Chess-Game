@@ -18,17 +18,22 @@ public class Rook extends ChessPiece{
   public boolean isVaildMove(Move move, IChessPiece[][] board){
     //Valid Rook moves: Forward & backward any number of unoccupied squares.
     //                : Diagonally any number of unoccupied squares.
-    //                : Take an enemy piece from any direction moved.
+    //                : Take an enemy piece from any vaild direction.
     //                :
     // Return false if any of these cases are FALSE
     
     //Checks to see if the superclass isValidMove is false.
-    if(super.isValidMove(move, board) == false)
+    if(super.isValidMove == false)
       return false;
     
-    //Checks to see if the rook is moving over empty squares.
+    //Checks to see if the rook isn't moving over empty squares.
     if(super.moveIsOnlyOverEmptySquares(move, board) == false)
       return false;
+      
+    //Checks to see if the piece is moving diagonally.  
+    if(move.fromRow != move.toRow && move.fromColumn != move.toColumn)
+      return false;
+      
     else
       return true;
   }
