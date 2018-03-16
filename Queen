@@ -11,7 +11,7 @@ public class Queen extends ChessPiece{
   }
   
   public String type(){
-    return "Queen;
+    return "Queen";
   }
   
   public boolean isValidMove(Move move, IChessPiece[][] board){
