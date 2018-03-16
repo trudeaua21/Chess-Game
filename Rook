@@ -27,11 +27,11 @@ public class Rook extends ChessPiece{
       return false;
     
     //Checks to see if the rook isn't moving over empty squares.
-    if(super.moveIsOnlyOverEmptySquares(move, board) == false)
+    else if(super.moveIsOnlyOverEmptySquares(move, board) == false)
       return false;
       
     //Checks to see if the piece is moving diagonally.  
-    if(move.fromRow != move.toRow && move.fromColumn != move.toColumn)
+    else if(move.fromRow != move.toRow && move.fromColumn != move.toColumn)
       return false;
       
     else
