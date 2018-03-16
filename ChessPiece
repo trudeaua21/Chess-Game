@@ -19,7 +19,7 @@ public abstract class ChessPiece implements IChessPiece {
 	   if(move.toRow == move.fromRow && move.toColumn == move.fromColumn)
 	   	return false;
 	   //Spencer 2. the "from" square must contain a chess piece (the board space is != null)
-	   else if(move.toRow == null && move.toColumn)
+	   else if(board[move.fromRow][move.fromColumn] == null)
 	   	return false;
 	   
 	   Aaron//3. the "to" square has to be empty or contains the opposite player's piece
