@@ -34,7 +34,7 @@ public class ChessModel implements IChessModel{
        return 8;
    }
    public IChessPiece pieceAt(int row, int col) {
-       return the index of the board at the given coordinates
+       //return the index of the board at the given coordinates
    }
 
    // add other public or helper methods as needed
