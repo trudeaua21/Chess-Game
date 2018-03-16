@@ -6,6 +6,10 @@ public class Rook extends ChessPiece{
   }
 
   public boolean isVaildMove(){
-    return false;
+    //Checks to see if the rook is moving over empty squares.
+    if(moveIsOnlyOverEmptySquares(move(fromRow, fromColumn, toRow, toColumn), board[move.toRow][move.toColumn]) == false)
+      return false;
+    else
+      return true;
   }
 }
