@@ -19,11 +19,11 @@ public class Bishop extends ChessPiece{
     if(super.isValidMove(move, board) == false)
       return false;
       
-    //Checks to see if the Bishop is moving over empty squares.
+    //Checks to see if the Bishop isn't moving over empty squares.
     if(super.moveIsOnlyOverEmptySquares(move, board) == false)
       return false;
       
-    //Checks to see if the piece is moving diagonally.
+    //Checks to see if the piece is moving horizontally or vertically.
     if(move.fromColumn == move.toColumn || move.fromRow == move.toRow)
       return false;
       
