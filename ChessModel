@@ -16,6 +16,7 @@ public class ChessModel implements IChessModel{
    public boolean gameOver( ) {
       return false;
    }
+   
    public boolean isValidMove(Move move) {
       //If the board space isn't null, return the isValidMove of the piece at the fromSpace of the move.
       if(board[move.fromRow][move.toRow] == null)
@@ -29,21 +30,24 @@ public class ChessModel implements IChessModel{
       if(isValidMove(move)){
          board[move.toRow][move.toColumn] = board[move.fromRow][move.fromColumn];
          board[move.fromRow][move.fromColumn] = null;
-      }
-       // complete this
    }
-  public boolean inCheck(Player p) {
+
+   public boolean inCheck(Player p) {
        return false;
    }
+   
    public Player currentPlayer() {
        return player;
    }
+   
    public int numRows() {
        return 8;
    }
+   
    public int numColumns() {
        return 8;
    }
+   
    public IChessPiece pieceAt(int row, int col) {
        //return the index of the board at the given coordinates
        return board[row][col];
