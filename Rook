@@ -23,7 +23,7 @@ public class Rook extends ChessPiece{
     // Return false if any of these cases are FALSE
     
     //Checks to see if the superclass isValidMove is false.
-    if(super.isValidMove == false)
+    if(super.isValidMove(move, board) == false)
       return false;
     
     //Checks to see if the rook is moving over empty squares.
