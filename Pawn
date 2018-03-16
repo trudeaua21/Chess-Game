@@ -10,7 +10,7 @@ public class Pawn extends ChessPiece{
     flag = false;
   }
 
-  public boolean isValidMove(){
+  public boolean isValidMove(Move move, IChessPiece[][] board){
     //Valid pawn moves: 1 forward
     //                : 2 forward on first move
     //                : Diagonally if you are taking an enemy piece
@@ -19,7 +19,7 @@ public class Pawn extends ChessPiece{
     
     
     //If the superclass isValid is false, return false.
-    if(super.isValidMove() == false)
+    if(super.isValidMove(move, board) == false)
       return false;
     
     //If the move is backwards, return false(cs grid; greater less means higher on the board)
