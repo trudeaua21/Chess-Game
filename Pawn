@@ -5,8 +5,8 @@ public class Pawn extends ChessPiece{
   /** A flag for whether the piece has moved yet */
   private boolean flag;
   
-  public Pawn(){
-    
+  public Pawn(Player player){
+    super(player);
   }
   
   public String type(){
