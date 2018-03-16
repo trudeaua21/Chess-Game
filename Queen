@@ -1,6 +1,14 @@
 package ChessPrj;
 
 public class Queen extends ChessPiece{
+
+  private boolean flag; 
+
+  public Queen(Player player){
+    super(player);
+    flag = false;
+  }
+  
   public String type(){
     return "Queen;
   }
