@@ -17,6 +17,11 @@ public class Pawn extends ChessPiece{
     //                : en passant
     // Return false if any of these cases are FALSE
     
+    
+    //If the superclass isValid is false, return false.
+    if(super.isValidMove() == false)
+      return false;
+    
     //If the move is backwards, return false(cs grid; greater less means higher on the board)
     if(move.fromRow < move.toRow)
       return false;
@@ -28,6 +33,9 @@ public class Pawn extends ChessPiece{
     //If the flag is inactive and the move is greater than one space forward, return false (NOTE, you don't need to worry about
     //the left/right movement here)
     //TODO: SPENCER////////
+    ////////////
+    //////////////
+    ///////////////
     
     //Return false if the move is more than 1 space left/right
     if(Math.abs(move.fromColumn - move.toColumn) > 1)
