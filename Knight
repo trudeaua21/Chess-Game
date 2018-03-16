@@ -1,7 +1,14 @@
 package chess;
 
 public class Knight extends ChessPiece{
+  
+  private boolean flag; 
 
+  public Knight(Player player){
+    super(player);
+    flag = false;
+  }
+  
   public String type(){
     return "Knight";
   }
