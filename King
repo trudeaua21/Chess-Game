@@ -1,7 +1,8 @@
 package ChessPrj;
 
 public class King extends ChessPiece{
-
+  
+  /* A flag variable for whether a piece has moved yet.*/
   private boolean flag; 
 
   public King(Player player){
