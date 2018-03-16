@@ -15,7 +15,11 @@ public class Queen extends ChessPiece{
   }
   
   public boolean isValidMove(){
-    return false;
+    //Valid queen moves: 1 forward
+    //                : 2 forward on first move
+    //                : Diagonally if you are taking an enemy piece
+    //                : en passant
+    // Return false if any of these cases are FALSE
   }
 
 }
