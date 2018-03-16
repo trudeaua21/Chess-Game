@@ -16,8 +16,12 @@ public class ChessModel implements IChessModel{
       return false;
    }
    public boolean isValidMove(Move move) {
-      
+      //If the board space isn't null, return the isValidMove of the piece at the fromSpace of the move.
+      if(board[move.fromRow][move.toRow] == null)
+         return false;
+      return board[move.fromRow][move.fromColumn].isValidMove(move, board);
    }
+   
    public void move(Move move) {
        // complete this
    }
