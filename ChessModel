@@ -8,13 +8,15 @@ public class ChessModel implements IChessModel{
    // declare other instance variables as needed
 
    public ChessModel() {
-    // complete this
+      //Instantiate and create the board
+      board = new IChessPiece[8][8];
+      player = PLAYER.White;
    }
    public boolean gameOver( ) {
       return false;
    }
    public boolean isValidMove(Move move) {
-   // complete this
+      
    }
    public void move(Move move) {
        // complete this
