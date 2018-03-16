@@ -15,7 +15,7 @@ public class Pawn extends ChessPiece{
   }
 
   public boolean isValidMove(Move move, IChessPiece[][] board){
-    //Valid pawn moves: 1 forward
+    //Valid Pawn moves: 1 forward
     //                : 2 forward on first move
     //                : Diagonally if you are taking an enemy piece
     //                : en passant
