@@ -23,6 +23,12 @@ public class ChessModel implements IChessModel{
    }
    
    public void move(Move move) {
+      // take the piece from the "from" square, make the "from" square null, and move it to the "to" square
+      //NOTE: IDK if we need to check if its valid first, for now I'll assume it should be
+      if(isValidMove(move)){
+         board[move.toRow][move.toColumn] = board[move.fromRow][move.fromColumn];
+         board[move.fromRow][move.fromColumn] = null;
+      }
        // complete this
    }
   public boolean inCheck(Player p) {
