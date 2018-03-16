@@ -5,6 +5,10 @@ public class Rook extends ChessPiece{
   /* A flag variable for whether a piece has moved yet.*/
   private boolean flag;
 
+  public Rook(){
+  
+  }
+
   public String type(){
     return "Rook";
     flag = false;
