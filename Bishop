@@ -1,13 +1,29 @@
 package chess;
 
 public class Bishop extends ChessPiece{
+  
+  /* A flag variable for whether a piece has moved yet.*/
+  private boolean flag;
 
+  public Bishop(Player player){
+    super(player);
+    flag = false;
+  }
+  
   public String type(){
     return "Bishop";
   }
   
   public boolean isValidMove(){
-    return false;
+    //
+  
+  
+    //Checks to see if the superclass isValidMove is false.
+    if(super.isValidMove == false)
+      return false;
+      
+    if(super.moveIsOnlyOverEmptySquares(move, board) == false)
+      return false;
   }
 
 }
