@@ -49,4 +49,6 @@ public class Pawn extends ChessPiece{
       
     //TODO: en passant
   }
+  
+  //TODO: Promotion to another piece (EX: Pawn to a Queen).
 }
