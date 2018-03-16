@@ -1,31 +1,68 @@
 package chess;
 
-public class ChessPanel extends JPanel {
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-   private JButton[][] board;   
-   private ChessModel model;
+public class ChessPanel extends JPanel{
 
-   // declare other instance variables as needed
+	   private JButton[][] board;   
+	  // private ChessModel model;
+	   
+	   private ImageIcon imgBlkPawn;
 
-   private ButtonListener buttonListener = new ButtonListener();
+	   // declare other instance variables as needed
 
-   public ChessPanel() {
-    // complete this
-   }
+	   private ButtonListener buttonListener = new ButtonListener();
 
-   // method that updates the board
-   private void displayBoard() {
-    // complete this
-   }
+	   public ChessPanel() {
+	      board = new JButton[8][8];
+	     // model = new ChessModel();
+	      int i = 0;
+	      setLayout(new GridLayout(8,8));
+	      
+	      imgBlkPawn = new ImageIcon ("bPawn.png");
+	      
+	      //makes a board with alternating black and white buttons
+	      for(int row = 0; row < 8; row++){
+	         for(int col = 0; col < 8; col++){
+	        	 board[row][col] = new JButton(imgBlkPawn);
+//	            //make a black space
+	            if((row % 2 == 0 && col % 2 == 0) || (row % 2 == 1 && col % 2 == 1)) {
+	               //button w/ white icon
+	            	board[row][col].setBackground(Color.MAGENTA);
+	            }
+//	            //make a white space
+	            else{
+	               //button w/ white icon
+	            	board[row][col].setBackground(Color.CYAN);
+	            }
+	            //board[row][col].setOpaque(true);
+	            board[row][col].setBorder(null);
+	            add(board[row][col]);
+	            i++;
+	         }
+	      }
+	      
+	  
+	      
+	      
+	      
+	   }
 
-   // add other helper methods as needed
+	   // method that updates the board
+	   private void displayBoard() {
+	    // complete this
+	   }
 
-   // inner class that represents action listener for buttons
-   private class ButtonListener implements ActionListener {
+	   // add other helper methods as needed
 
-     public void actionPerformed(ActionEvent event) {
-     // complete this
-     }
-     
-   }
+	   // inner class that represents action listener for buttons
+	   private class ButtonListener implements ActionListener {
+
+	     public void actionPerformed(ActionEvent event) {
+	     // complete this
+	     }
+	     
+	  }
 }
