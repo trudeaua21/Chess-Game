@@ -14,8 +14,19 @@ public class King extends ChessPiece{
     return "King";
   }
   
-  public boolean isValidMove(){
-    return false;
+  public boolean isValidMove(Move move, IChessPiece[][] board){
+    //Valid King moves: One space in any direction.
+    //                : Can only move if the move won't put the
+    //                  piece in check.
+    // Return false if any of these cases are FALSE.
+    
+    //Checks to see if the superclass isValidMove is false.
+    if(super.isValidMove(move, board) == false)
+      return false;
+      
+    //Checks to see if the King is moving more than one square
+    //
+    if(Math.abs(move.toColumn - move.fromColumn
   }
 
 }
