@@ -18,6 +18,7 @@ public class King extends ChessPiece{
     //Valid King moves: One space in any direction.
     //                : Can only move if the move won't put the
     //                  piece in check.
+    //                : TODO: Rules for castling.
     // Return false if any of these cases are FALSE.
     
     //Checks to see if the superclass isValidMove is false.
