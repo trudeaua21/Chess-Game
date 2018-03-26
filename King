@@ -25,8 +25,19 @@ public class King extends ChessPiece{
       return false;
       
     //Checks to see if the King is moving more than one square
-    //
-    if(Math.abs(move.toColumn - move.fromColumn
+    //vertically.
+    if(Math.abs(move.toRow - move.fromRow) > 1)
+      return false;
+    
+    //Checks to see if the King is moving more than one square
+    //horizantally.
+    if(Math.abs(move.toColumn - move.fromColumn) > 1)
+      return false;
+      
+    //Checks to see if the King will be in check if moved.
+    if(inCheck(toRow, toColumn) == true)
+      return false;
   }
 
+  //TODO: Castling with Rook.
 }
