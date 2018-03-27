@@ -11,7 +11,7 @@ public class Knight extends ChessPiece{
   }
   
   public boolean isValidMove(){
-    //Valid Rook moves: 
+    //Valid Knight moves: 
     //                : 
     //                : 
     //                : 
