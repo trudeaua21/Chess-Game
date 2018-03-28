@@ -27,6 +27,10 @@ public class Bishop extends ChessPiece{
     else if(move.fromColumn == move.toColumn || move.fromRow == move.toRow)
       return false;
       
+    //Checks to see if the King will be in check if the Bishop is moved.
+    if(inCheck() == true)
+      return false;
+      
     else
       return true;
   }
