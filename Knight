@@ -10,12 +10,44 @@ public class Knight extends ChessPiece{
     return "Knight";
   }
   
-  public boolean isValidMove(){
-    //Valid Knight moves: 
-    //                : 
-    //                : 
-    //                : 
-    // Return false if any of these cases are FALSE
+  public boolean isValidMove(Move move, IChessPiece[][] board){
+    //Valid Knight moves: Two squares horizontally and one
+    //                  : square vertically. (L-Shape)
+    //                  : Two squares vertically and one
+    //                  : square horizontally. (L-Shape)
+    //                  : Can jump over any piece.
+    //                  : Take an enemy piece from any
+    //                  : valid move.
+    // Return false if any of these cases are FALSE.
+    
+    //Checks to see if the superclass isValidMove is false.
+    if(super.isValidMove(move, board) == false)
+      return false;
+    
+    //Checks to see if the Knight is moving in a horizontal
+    //L-shape that's greater than allowed.
+    if(Math.abs(move.toColumn - move.fromColumn) > 2 &&
+       Math.abs(move.toRow - move.fromRow > 1)
+        return false;
+        
+    //Checks to see if the Knight is moving in a horizontal
+    //L-shape that's less than allowed.
+    if(Math.abs(move.toColumn - move.fromColumn) < 2 &&
+       Math.abs(move.toRow - move.fromColumn) < 1)
+        return false;
+       
+    //Checks to see if the Knight is moving in a vertical
+    //L-shape that's more than allowed.
+    if(Math.abs(move.toColumn - move.fromColumn) < 1 &&
+       Math.abs(move.toRow - move.fromRow) < 2)
+        return false;
+    
+    //Checks to see if the Knight is moving in a vertical
+    //L-shape that's less than allowed.
+    if(Math.abs(move.toColumn - move.fromColumn) > 1 &&
+       Math.abs(move.toRow - move.fromRow) > 2)
+        return false;
+   
   }
 
 }
