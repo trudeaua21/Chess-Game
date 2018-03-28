@@ -33,6 +33,26 @@ public class ChessModel implements IChessModel{
    }
 
    public boolean inCheck(Player p) {
+       //If the player that isn't player p's King can be killed by a possible move by the other player
+       //If player p is white, make player p2 black.
+       //If player p is black, make player p2 white.
+       
+       for(int row = 0; row < 8; row++){
+         for(int col = 0; col < 8; col++){
+            if(pieceAt(row, col).player == p2){
+            int fromRow = row;
+            int fromCol = col;
+               for(int row2 = 0; row2 < 8; row2++){
+                  for(int col2 = 0; col2 < 8; col2++){
+                     Move m = new Move(fromRow, fromCol, row2, col2);
+                     if(isValid(m) && pieceAt(row2, col2).type().equals("King"))
+                        return true;
+                  }
+               }
+            }
+         }
+       }
+       
        return false;
    }
    
