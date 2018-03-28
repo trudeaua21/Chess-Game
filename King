@@ -36,7 +36,7 @@ public class King extends ChessPiece{
       return false;
       
     //Checks to see if the King will be in check if moved.
-    if(inCheck(toRow, toColumn) == true)
+    if(inCheck() == true)
       return false;
   }
 
