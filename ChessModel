@@ -1,79 +1,154 @@
 package chess;
 
-public class ChessModel implements IChessModel{
+/**********************************************************************
+ * This class contains the basic functions of the game of Chess.
+ * EX: Moving, King in check, etc.
+ * 
+ * @author Aaron ----- & Spencer Keeton
+ * @version March 30th, 2018
+ *********************************************************************/
+public class ChessModel implements IChessModel {
 
-   private IChessPiece[][] board;
-   private Player player;
-   
-   // declare other instance variables as needed
+	/* This variable is the board. */
+	private IChessPiece[][] board;
 
-   public ChessModel() {
-      //Instantiate and create the board
-      board = new IChessPiece[8][8];
-      player = PLAYER.White;
-   }
-   
-   public boolean gameOver( ) {
-      return false;
-   }
-   
-   public boolean isValidMove(Move move) {
-      //If the board space isn't null, return the isValidMove of the piece at the fromSpace of the move.
-      if(board[move.fromRow][move.toRow] == null)
-         return false;
-      return board[move.fromRow][move.fromColumn].isValidMove(move, board);
-   }
-   
-   public void move(Move move) {
-      // take the piece from the "from" square, make the "from" square null, and move it to the "to" square
-      //NOTE: IDK if we need to check if its valid first, for now I'll assume it should be
-      if(isValidMove(move)){
-         board[move.toRow][move.toColumn] = board[move.fromRow][move.fromColumn];
-         board[move.fromRow][move.fromColumn] = null;
-   }
+	/* This variable is the player. */
+	private Player player;
 
-   public boolean inCheck(Player p) {
-       //If the player that isn't player p's King can be killed by a possible move by the other player
-       //If player p is white, make player p2 black.
-       //If player p is black, make player p2 white.
-       
-       for(int row = 0; row < 8; row++){
-         for(int col = 0; col < 8; col++){
-            if(pieceAt(row, col).player == p2){
-            int fromRow = row;
-            int fromCol = col;
-               for(int row2 = 0; row2 < 8; row2++){
-                  for(int col2 = 0; col2 < 8; col2++){
-                     Move m = new Move(fromRow, fromCol, row2, col2);
-                     if(isValid(m) && pieceAt(row2, col2).type().equals("King"))
-                        return true;
-                  }
-               }
-            }
-         }
-       }
-       
-       return false;
-   }
-   
-   public Player currentPlayer() {
-       return player;
-   }
-   
-   public int numRows() {
-       return 8;
-   }
-   
-   public int numColumns() {
-       return 8;
-   }
-   
-   public IChessPiece pieceAt(int row, int col) {
-       //return the index of the board at the given coordinates
-       return board[row][col];
-   }
+	/******************************************************************
+	 * This constructor instantiates the board and sets the player.
+	 *****************************************************************/
+	public ChessModel() {
+		// Instantiate and create the board
+		board = new IChessPiece[8][8];
+		player = PLAYER.White;
+	}
 
-   // add other public or helper methods as needed
+	/******************************************************************
+	 * This method ends the game under the conditions of a win.
+	 * 
+	 * @return True if the game is over; False if the game is not over.
+	 *****************************************************************/
+	public boolean gameOver() {
+		return false;
+	}
+
+	/******************************************************************
+	 * This method uses the isValidMove method from the ChessPiece
+	 * class to check if the move is valid. This method also checks to
+	 * see if the board is null.
+	 * 
+	 * @param move
+	 *            The current move that is being checked.
+	 * @return False if the board is null;
+	 * 		  board[move.fromRow][move.fromColumn].
+	 *         isValidMove(move, board) if the board isn't null to use
+	 *         the isValidMove method from the ChessPiece class.
+	 *****************************************************************/
+	public boolean isValidMove(Move move) {
+		// If the board space isn't null, return the isValidMove of
+		// the piece at the fromSpace of the move.
+		if (board[move.fromRow][move.toRow] == null)
+			return false;
+		return board[move.fromRow][move.fromColumn].isValidMove(move, board);
+	}
+
+	/******************************************************************
+	 * This method moves a piece from its current square, to the chosen
+	 * square if the move is valid.
+	 * 
+	 * @param move
+	 * 			The current move that is to be checked and made.
+	 *****************************************************************/
+	public void move(Move move) {
+		// Take the piece from the "from" square, make the "from" square
+		// null, and move it to the "to" square.
+		// NOTE: I don't know if we need to check if its valid first, for
+		// now I'll assume it should be.
+		if(isValidMove(move)){
+			board[move.toRow][move.toColumn] =
+					board[move.fromRow][move.fromColumn];
+
+			board[move.fromRow][move.fromColumn] = null;
+		}
+
+		/******************************************************************
+		 * This method checks the board to see if the player's King is
+		 * in check.
+		 * 
+		 * @param p
+		 *            This is the player that is passed which is to be 
+		 *            checked to see if their King is in check.
+		 * @return True if the King of player p is in check; False if the 
+		 * 		  King of player p is not in check.
+		 *****************************************************************/
+	public boolean inCheck(Player p) {
+		// If the player that isn't player p's King can be killed by a
+		// possible move by the other player.
+		// If player p is white, make player p2 black.
+		// If player p is black, make player p2 white.
+
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (pieceAt(row, col).player == p2) {
+					int fromRow = row;
+					int fromCol = col;
+					for (int row2 = 0; row2 < 8; row2++) {
+						for (int col2 = 0; col2 < 8; col2++) {
+							Move m = new Move(fromRow, fromCol, row2, col2);
+							if (isValid(m) && pieceAt(row2, col2).type()
+									.equals("King"))
+								return true;
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+		}
+
+	/******************************************************************
+	 * This method returns the currentPlayer
+	 * 
+	 * @return The current player
+	 *****************************************************************/
+	public Player currentPlayer() {
+		return player;
+	}
+
+	/******************************************************************
+	 * This method returns the number of rows. This number is set
+	 * to always be 8.
+	 * 
+	 * @return The number of rows, which is 8.
+	 *****************************************************************/
+	public int numRows() {
+		return 8;
+	}
+
+	/******************************************************************
+	 * This method returns the number of columns. This number is set
+	 * to always be 8.
+	 * 
+	 * @return The number of columns, which is 8.
+	 *****************************************************************/
+	public int numColumns() {
+		return 8;
+	}
+
+	/******************************************************************
+	 * This method returns the index of the board at the given
+	 * coordinates.
+	 * 
+	 * @param row
+	 *            The row coordinate.
+	 * @param col
+	 *            The column coordinate.
+	 * @return The piece at the given board coordinates.
+	 *****************************************************************/
+	public IChessPiece pieceAt(int row, int col) {
+		return board[row][col];
+	}
 
 }
-
