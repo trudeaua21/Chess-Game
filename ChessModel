@@ -4,7 +4,7 @@ package chess;
  * This class contains the basic functions of the game of Chess.
  * EX: Moving, King in check, etc.
  * 
- * @author Aaron ----- & Spencer Keeton
+ * @author Aaron Trudeau & Spencer Keeton
  * @version March 30th, 2018
  *********************************************************************/
 public class ChessModel implements IChessModel {
