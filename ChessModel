@@ -9,10 +9,10 @@ package chess;
  *********************************************************************/
 public class ChessModel implements IChessModel {
 
-	/* This variable is the board. */
+	/** This variable is the board. */
 	private IChessPiece[][] board;
 
-	/* This variable is the player. */
+	/** This variable is the player. */
 	private Player player;
 
 	/******************************************************************
