@@ -8,7 +8,7 @@ package chess;
  *********************************************************************/
 public abstract class ChessPiece implements IChessPiece {
 
-	/* This variable is for owner ship of the current piece. */
+	/** This variable is for owner ship of the current piece. */
 	private Player owner;
 
 	/******************************************************************
