@@ -49,7 +49,7 @@ public abstract class ChessPiece implements IChessPiece {
 	 * @param board
 	 *            The chess board.
 	 * @return False if the move isn't valid; True if the move is
-	 * 	   valid.
+	 * 		   valid.
 	 *****************************************************************/
 	public boolean isValidMove(Move move, IChessPiece[][] board) {
 		// move is board[row][col]
@@ -64,7 +64,8 @@ public abstract class ChessPiece implements IChessPiece {
 
 		// Checks to see if the piece is moving to a square occupied by
 		// the same player's piece.
-		if (board[move.toRow][move.toColumn] != null && board[move.toRow][move.toColumn].player() != this.owner)
+		if (board[move.toRow][move.toColumn] != null &&
+		    board[move.toRow][move.toColumn].player() != this.owner)
 			return false;
 
 		return true;
@@ -116,7 +117,7 @@ public abstract class ChessPiece implements IChessPiece {
 	 * @return False if the diagonal move is not over empty squares;
 	 * 	   True if the diagonal move is over empty squares.
 	 *****************************************************************/
-	// NOTE: THIS HERE IS PROBABLY STUPID
+	//NOTE: This may not be necessary.
 	private boolean diagonalMoveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board) {
 		// If the move is moving diagonally
 		// NOTE: we only need to worry about cases where we subtract/add the row
@@ -169,7 +170,7 @@ public abstract class ChessPiece implements IChessPiece {
 				for (int i = move.fromRow + 1; i < move.toRow; i++)
 					if (board[i][move.fromColumn] != null)
 						// Move isn't over only empty squares if
-						// one of the board locations is null.
+						// one of the board locations
 						return false;
 			}
 			// If the piece is moving up.
@@ -202,8 +203,8 @@ public abstract class ChessPiece implements IChessPiece {
 				// For each piece between the two locations.
 				for (int i = move.fromColumn + 1; i < move.toColumn; i++)
 					if (board[move.fromRow][i] != null)
-						// Move isn't over only empty squares if 
-						// one of the board locations is null.
+						// Move isn't over only empty squares if
+						// one of the board locations
 						return false;
 			}
 			// If the piece is moving left
