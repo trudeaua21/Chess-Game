@@ -1,125 +1,220 @@
 package chess;
 
+/**********************************************************************
+ * This class contains the basic rules that apply to every chess piece.
+ * 
+ * @author Aaron ----- & Spencer Keeton
+ * @version March 30th, 2018
+ *********************************************************************/
 public abstract class ChessPiece implements IChessPiece {
 
-  private Player owner;
-  protected ChessPiece(Player player) {
-    this.owner = player;
-  }
+	/* This variable is for owner ship of the current piece. */
+	private Player owner;
 
-  public abstract String type();
-  
-  public Player player() {
-    return this.owner;
-  }
+	/******************************************************************
+	 * This is a constructor which instantiates owner to the current
+	 * player.
+	 * 
+	 * @param player
+	 *            The current player is sent.
+	 *****************************************************************/
+	protected ChessPiece(Player player) {
+		this.owner = player;
+	}
 
-  public boolean isValidMove(Move move, IChessPiece[][] board) {
-  	//move is board[row][col]
-	   //Spencer 1. each move must involve two different squares (the from and the to must be different)
-	   if(move.toRow == move.fromRow && move.toColumn == move.fromColumn)
-	   	return false;
-	   //Spencer 2. the "from" square must contain a chess piece (the board space is != null)
-	   else if(board[move.fromRow][move.fromColumn] == null)
-	   	return false;
-	   
-	   Aaron//3. the "to" square has to be empty or contains the opposite player's piece
-	   if(board[move.toRow][move.toColumn] != null && board[move.toRow][move.toColumn].player() != this.owner)
-	   	return false;
-		
-	return true;
-  }
-  
-  //IMPORTANT: THIS METHOD WILL ONLY WORK FOR ROOKS, BISHOPS AND QUEENS:
-	//KNIGHTS WILL NOT WORK AS IT WILL TREAT IT'S MOVE AS THOUGH IT MOVES
-	//DIAGONALLY STRAIGHT.
-	public boolean moveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board){
-		//If the move is only moving over the same row
-		if(move.fromRow == move.toRow && move.fromColumn != move.toColumn)
+	/******************************************************************
+	 * Returns the type of the piece in terms of the game of Chess. 
+	 * EX: King, Rook, Queen, etc.
+	 * 
+	 * @return The type of this piece.
+	 *****************************************************************/
+	public abstract String type();
+
+	/******************************************************************
+	 * This method represents the player.
+	 * 
+	 * @return The owner that has been set to the player.
+	 *****************************************************************/
+	public Player player() {
+		return this.owner;
+	}
+
+	/******************************************************************
+	 * This method checks to see if a move is valid. This is the most 
+	 * basic version of this method, so it checks for the rules that
+	 * apply to every piece.
+	 * 
+	 * @param move
+	 *            The move that is being checked.
+	 * @param board
+	 *            The chess board.
+	 * @return False if the move isn't valid; True if the move is
+	 * 	   valid.
+	 *****************************************************************/
+	public boolean isValidMove(Move move, IChessPiece[][] board) {
+		// move is board[row][col]
+
+		// Checks to see if the move is moving to the same square.
+		if (move.toRow == move.fromRow && move.toColumn == move.fromColumn)
+			return false;
+
+		// Checks to see if the from square is empty.
+		else if (board[move.fromRow][move.fromColumn] == null)
+			return false;
+
+		// Checks to see if the piece is moving to a square occupied by
+		// the same player's piece.
+		if (board[move.toRow][move.toColumn] != null && board[move.toRow][move.toColumn].player() != this.owner)
+			return false;
+
+		return true;
+	}
+
+	/******************************************************************
+	 * This method checks to see if a move is being made only over 
+	 * empty squares. This method will only work for Rooks, Bishops,
+	 * and Queens. Knights will not work as it will treat its move as
+	 * though it moves diagonally straight.
+	 * 
+	 * @param move
+	 *            The current move that is being checked.
+	 * @param board
+	 *            The chess board.
+	 * @return The boolean value of 
+	 * 	   horizontalMoveIsOnlyOverEmptySquares if the move is 
+	 * 	   horizontal;
+	 * 
+	 *         The boolean value of
+	 *         verticalMoveIsOnlyOverEmptySquares if the move is
+	 *         vertical;
+	 * 
+	 *         The boolean value of
+	 *         diagonalMoveIsOnlyOverEmptySquares if the move is
+	 *         diagonal.
+	 *****************************************************************/
+	public boolean moveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board) {
+		// If the move is only moving over the same row
+		if (move.fromRow == move.toRow && move.fromColumn != move.toColumn)
 			return horizontalMoveIsOnlyOverEmptySquares(move, board);
-		//If the move is moving over the same column
-		else if(move.fromRow != move.toRow && move.fromColumn == move.toColumn) 
+		// If the move is moving over the same column
+		else if (move.fromRow != move.toRow && move.fromColumn == move.toColumn)
 			return verticalMoveIsOnlyOverEmptySquares(move, board);
-		
-		//Move is diagonal
+
+		// Move is diagonal
 		else
 			return diagonalMoveIsOnlyOverEmptySquares(move, board);
 	}
 
-	//NOTE: THIS HERE IS PROBABLY STUPID
+	/******************************************************************
+	 * This helper method checks to see if a move in a diagonal
+	 * direction is being made only over empty squares.
+	 * 
+	 * @param move
+	 *            The current move that is being checked.
+	 * @param board
+	 *            The chess board.
+	 * @return False if the diagonal move is not over empty squares;
+	 * 	   True if the diagonal move is over empty squares.
+	 *****************************************************************/
+	// NOTE: THIS HERE IS PROBABLY STUPID
 	private boolean diagonalMoveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board) {
-		//If the move is moving diagonally
-		//NOTE: we only need to worry about cases where we subtract/add the row
-		//and column value by the same value each time, as no move that we'd need
-		//to use this method to check would involve a non-perfect 1 / 1 slope move.
-		//Down-Right(using CS grid, reminder: down is row++)
-		if(move.fromRow < move.toRow && move.fromColumn < move.toColumn)
-			for(int i = 1; i < move.toColumn - move.fromColumn; i++)
-				if(board[move.fromRow + i][move.fromColumn + i] != null)
+		// If the move is moving diagonally
+		// NOTE: we only need to worry about cases where we subtract/add the row
+		// and column value by the same value each time, as no move that we'd need
+		// to use this method to check would involve a non-perfect 1 / 1 slope move.
+		// Down-Right(using CS grid, reminder: down is row++)
+		if (move.fromRow < move.toRow && move.fromColumn < move.toColumn)
+			for (int i = 1; i < move.toColumn - move.fromColumn; i++)
+				if (board[move.fromRow + i][move.fromColumn + i] != null)
 					return false;
-		
-		//Up-Right
-		if(move.fromRow > move.toRow && move.fromColumn < move.toColumn)
-			for(int i = 1; i < move.toColumn - move.fromColumn; i++)
-				if(board[move.fromRow - i][move.fromColumn + i] != null)
+
+		// Up-Right
+		if (move.fromRow > move.toRow && move.fromColumn < move.toColumn)
+			for (int i = 1; i < move.toColumn - move.fromColumn; i++)
+				if (board[move.fromRow - i][move.fromColumn + i] != null)
 					return false;
-		
-		//Down-Left
-		if(move.fromRow < move.toRow && move.fromColumn > move.toColumn)
-			for(int i = 1; i < move.fromColumn - move.toColumn; i++)
-				if(board[move.fromRow + i][move.fromColumn - i] != null)
+
+		// Down-Left
+		if (move.fromRow < move.toRow && move.fromColumn > move.toColumn)
+			for (int i = 1; i < move.fromColumn - move.toColumn; i++)
+				if (board[move.fromRow + i][move.fromColumn - i] != null)
 					return false;
-		//Up-Left
-		if(move.fromRow > move.toRow && move.fromColumn > move.toColumn)
-			for(int i = 1; i < move.fromColumn - move.toColumn; i++)
-				if(board[move.fromRow - i][move.fromColumn - i] != null)
+		// Up-Left
+		if (move.fromRow > move.toRow && move.fromColumn > move.toColumn)
+			for (int i = 1; i < move.fromColumn - move.toColumn; i++)
+				if (board[move.fromRow - i][move.fromColumn - i] != null)
 					return false;
-		
+
 		return true;
 	}
 
+	/******************************************************************
+	 * This helper method checks to see if a move in a vertical
+	 * direction is being made only over empty squares.
+	 * 
+	 * @param move
+	 *            The current move that is being checked.
+	 * @param board
+	 *            The chess board.
+	 * @return False if the vertical move is not over empty squares;
+	 * 	   True if the vertical move is over empty squares.
+	 *****************************************************************/
 	private boolean verticalMoveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board) {
-		//If the move is moving over the same column
-		if(move.fromRow != move.toRow && move.fromColumn == move.toColumn) {
-			//If the piece is moving down
-			//TODO: I think this would be down since it's the CS grid
-			if(move.toRow > move.fromRow) {
-				//for each piece between the two locations
-				for(int i = move.fromRow + 1; i < move.toRow; i++)
-					if(board[i][move.fromColumn] != null)
-						//move isn't over only empty squares if one of the board locations is null
+		// If the move is moving over the same column.
+		if (move.fromRow != move.toRow && move.fromColumn == move.toColumn) {
+			// If the piece is moving down.
+			// TODO: I think this would be down since it's the CS grid.
+			if (move.toRow > move.fromRow) {
+				// for each piece between the two locations.
+				for (int i = move.fromRow + 1; i < move.toRow; i++)
+					if (board[i][move.fromColumn] != null)
+						// Move isn't over only empty squares if
+						// one of the board locations is null.
 						return false;
 			}
-			//If the piece is moving up
+			// If the piece is moving up.
 			else {
-				for(int i = move.fromRow - 1; i > move.toRow; i--)
-					if(board[i][move.fromColumn] != null)
+				for (int i = move.fromRow - 1; i > move.toRow; i--)
+					if (board[i][move.fromColumn] != null)
 						return false;
 			}
 		}
-		
+
 		return true;
 	}
 
+	/******************************************************************
+	 * This helper method checks to see if a move in a horizontal
+	 * direction is being made only over empty squares.
+	 * 
+	 * @param move
+	 *            The current move that is being checked.
+	 * @param board
+	 *            The chess board.
+	 * @return False if the horizontal move is not over empty squares;
+	 * 	   True if the horizontal move is over empty squares.
+	 *****************************************************************/
 	private boolean horizontalMoveIsOnlyOverEmptySquares(Move move, IChessPiece[][] board) {
-		//If the move is only moving over the same row
-		if(move.fromRow == move.toRow && move.fromColumn != move.toColumn) {
-			//If the piece is moving right
-			if(move.toColumn > move.fromColumn) {
-				//for each piece between the two locations
-				for(int i = move.fromColumn + 1; i < move.toColumn; i++)
-					if(board[move.fromRow][i] != null)
-						//move isn't over only empty squares if one of the board locations is null
+		// If the move is only moving over the same row.
+		if (move.fromRow == move.toRow && move.fromColumn != move.toColumn) {
+			// If the piece is moving right.
+			if (move.toColumn > move.fromColumn) {
+				// For each piece between the two locations.
+				for (int i = move.fromColumn + 1; i < move.toColumn; i++)
+					if (board[move.fromRow][i] != null)
+						// Move isn't over only empty squares if 
+						// one of the board locations is null.
 						return false;
 			}
-			//If the piece is moving left
+			// If the piece is moving left
 			else {
-				for(int i = move.fromColumn - 1; i > move.toColumn; i--)
-					if(board[move.fromRow][i] != null)
+				for (int i = move.fromColumn - 1; i > move.toColumn; i--)
+					if (board[move.fromRow][i] != null)
 						return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 }
