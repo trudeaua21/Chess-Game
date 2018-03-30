@@ -3,7 +3,7 @@ package chess;
 /**********************************************************************
  * This is the class for the Pawn piece.
  * 
- * @author Aaron ----- & Spencer Keeton
+ * @author Aaron Trudeau & Spencer Keeton
  * @version March 30th, 2018
  *********************************************************************/
 public class Pawn extends ChessPiece {
