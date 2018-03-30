@@ -1,60 +1,88 @@
-package ChessPrj;
+package chess;
 
-public class Pawn extends ChessPiece{
-  
-  /** A flag for whether the piece has moved yet */
-  private boolean flag;
-  
-  public Pawn(Player player){
-    super(player);
-    flag = false;
-  }
-  
-  public String type(){
-    return "Pawn";
-  }
+/**********************************************************************
+ * This is the class for the Pawn piece.
+ * 
+ * @author Aaron ----- & Spencer Keeton
+ * @version March 30th, 2018
+ *********************************************************************/
+public class Pawn extends ChessPiece {
 
-  public boolean isValidMove(Move move, IChessPiece[][] board){
-    //Valid Pawn moves: 1 forward
-    //                : 2 forward on first move
-    //                : Diagonally if you are taking an enemy piece
-    //                : en passant
-    // Return false if any of these cases are FALSE
-    
-    
-    //If the superclass isValid is false, return false.
-    if(super.isValidMove(move, board) == false)
-      return false;
-    
-    //If the move is backwards, return false(cs grid; greater less means higher on the board)
-    if(move.fromRow < move.toRow)
-      return false;
-      
-    //If flag is active, and the move is greater than two spaces forward, return false
-    if(flag && move.fromRow - move.toRow > 2)
-      return false;
-      
-    //If the flag is inactive and the move is greater than one space forward, return false (NOTE, you don't need to worry about
-    //the left/right movement here)
-    if(Math.abs(move.fromRow - move.toRow) > 1)
-      return false;
-      
-    //Return false if the move is more than 1 space left/right
-    if(Math.abs(move.fromColumn - move.toColumn) > 1)
-      return false;
-      
-    //If the move is diagonal and there is not an enemy piece in that space
-    if(Math.abs(move.fromColumn - move.toColumn) > 0 && board[move.toRow][move.toColumn] == null)
-      return false;
-      
-    //Checks to see if the King will be in check if the Bishop is moved.
-    if(inCheck() == true)
-      return false;
-    
-    else
-      return true;
-  
-  }
-  
-  //TODO: Promotion to another piece (EX: Pawn to a Queen).
+	/** A flag for whether the piece has moved yet */
+	private boolean flag;
+
+	/******************************************************************
+	 * This constructor initializes the player and flag.
+	 * 
+	 * @param player
+	 *            The current player.
+	 *****************************************************************/
+	public Pawn(Player player) {
+		super(player);
+		flag = false;
+	}
+	
+	/******************************************************************
+	 * This method sets the type of the piece to Pawn.
+	 * 
+	 * @return "Pawn"
+	 *****************************************************************/
+	public String type() {
+		return "Pawn";
+	}
+	
+	/******************************************************************
+	 * This method checks to see if the move being made with the Pawn
+	 * is valid.
+	 * 
+	 * @return False if the move is not valid. True if the move is
+	 * 		   valid.
+	 *****************************************************************/
+	public boolean isValidMove(Move move, IChessPiece[][] board) {
+		// Valid Pawn moves: 1 forward
+		// : 2 forward on first move
+		// : Diagonally if you are taking an enemy piece
+		// Return false if any of these cases are FALSE.
+
+		// If the superclass isValid is false, return false.
+		if (super.isValidMove(move, board) == false)
+			return false;
+
+		// If the move is backwards, return false
+		// (cs grid; greater less means higher on the board).
+		if (move.fromRow < move.toRow)
+			return false;
+
+		// If flag is active, and the move is greater than two spaces
+		// forward, return false.
+		if (flag && move.fromRow - move.toRow > 2)
+			return false;
+
+		// If the flag is inactive and the move is greater than one
+		// space forward, return false (NOTE, you don't need to worry
+		// about the left/right movement here).
+		if (Math.abs(move.fromRow - move.toRow) > 1)
+			return false;
+
+		// Return false if the move is more than 1 space left/right.
+		if (Math.abs(move.fromColumn - move.toColumn) > 1)
+			return false;
+
+		// If the move is diagonal and there is not an enemy piece in 
+		// that space.
+		if (Math.abs(move.fromColumn - move.toColumn) > 0 &&
+				board[move.toRow][move.toColumn] == null)
+			return false;
+
+		// Checks to see if the King will be in check if the Bishop is
+		// moved.
+		if (inCheck() == true)
+			return false;
+
+		else
+			return true;
+
+	}
+
+	// TODO: Promotion to another piece (EX: Pawn to a Queen).
 }
